@@ -1,0 +1,6 @@
+{
+	"inputs" : [
+		"Jean-Louis", "Jean-Charles Mignard", "external", "peoplespheres.fr", "fr"
+	],
+	"queryExpression" : "input1.eachWordFirstChars(1) ~ '.' ~ (input2.wordsCount() > 1 ? input2.lastWords(-1).eachWordFirstChars(1) ~ input2.lastWords(1) : input2 ) ~ '@' ~ input3 ~ '.' ~ input4 ~ '.' ~ input5"
+}

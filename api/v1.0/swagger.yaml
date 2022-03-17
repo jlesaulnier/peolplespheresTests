@@ -1,0 +1,66 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  version: "1.0"
+  title: "API mail generator"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:9443"
+basePath: "/"
+tags:
+- name: mail-generator
+  description: ""
+  externalDocs:
+    description: "Find out more"
+    url: "https://localhost:9443/index.php"
+- name: email-generator
+  description: "Generation of an email based on input parameters and query expression"
+- name: generator
+  description: "Generation of an email based on input parameters and query expression"
+  externalDocs:
+    description: "Find out more about this email generator"
+    url: "http://swagger.io"
+schemes:
+- https
+paths:
+  /api/v1.0/index.php:
+    post:
+      tags:
+      - "email"
+      summary: "Generation of an email"
+      description: "Generation of an email"
+      operationId: "generateEmail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Input parameters and query to be used to generate the email"
+        required: true
+        schema:
+          $ref: "#/definition/schemas/Inputs"
+      responses:
+        "200":
+          description: "Success"
+definition:
+  schemas:
+    Inputs:
+      type: object
+      required:
+      - inputs
+      - queryExpression
+      properties:
+        inputs:
+          type: array
+          items:
+            type: string
+          example: ["Jean-Louis", "Jean-Charles Mignard", "external", "peoplespheres.fr", "fr"]
+        queryExpression:
+          type: string
+          example: "input1.eachWordFirstChars(1) ~ '.' ~ (input2.wordsCount() > 1 ? input2.lastWords(-1).eachWordFirstChars(1) ~ input2.lastWords(1) : input2 ) ~ '@' ~ input3 ~ '.' ~ input4 ~ '.' ~ input5"
